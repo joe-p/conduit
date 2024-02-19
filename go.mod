@@ -6,9 +6,10 @@ require (
 	github.com/algorand/go-algorand-sdk/v2 v2.4.0
 	github.com/algorand/go-codec/codec v1.1.10
 	github.com/algorand/indexer/v3 v3.4.0
+	github.com/go-chi/chi/v5 v5.0.10
 	github.com/google/uuid v1.3.1
 	github.com/jackc/pgx/v4 v4.13.0
-	github.com/joe-p/conduit-websocket-processor v0.0.0-20231016015503-5b75171679d5
+	github.com/lesismal/nbio v1.3.18
 	github.com/opensearch-project/opensearch-go/v2 v2.3.0
 	github.com/prometheus/client_golang v1.11.1
 	github.com/sirupsen/logrus v1.9.3
@@ -33,7 +34,6 @@ require (
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.4.0 // indirect
 	github.com/getkin/kin-openapi v0.107.0 // indirect
-	github.com/go-chi/chi/v5 v5.0.10 // indirect
 	github.com/go-openapi/jsonpointer v0.19.6 // indirect
 	github.com/go-openapi/swag v0.22.3 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
@@ -54,7 +54,6 @@ require (
 	github.com/labstack/echo/v4 v4.9.1 // indirect
 	github.com/labstack/gommon v0.4.0 // indirect
 	github.com/lesismal/llib v1.1.12 // indirect
-	github.com/lesismal/nbio v1.3.18 // indirect
 	github.com/lib/pq v1.10.9 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
