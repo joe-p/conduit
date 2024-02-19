@@ -14,6 +14,7 @@ import (
 	"github.com/algorand/conduit/conduit/plugins/processors"
 
 	"github.com/algorand/go-algorand-sdk/v2/encoding/msgpack"
+	"github.com/algorand/go-algorand-sdk/v2/types"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -169,6 +170,23 @@ func (a *WebsocketProcessor) Close() error {
 func (a *WebsocketProcessor) Process(input data.BlockData) (data.BlockData, error) {
 	start := time.Now()
 
+	txLeases := make(map[types.Txlease]types.Round)
+	txids := make(map[types.Txid]types.IncludedTransactions)
+
+	a.logger.Debug("Removing txleases and txids from block data")
+
+	if input.Delta != nil {
+		for k, v := range input.Delta.Txleases {
+			txLeases[k] = v
+		}
+		for k, v := range input.Delta.Txids {
+			txids[k] = v
+		}
+
+		input.Delta.Txleases = nil
+		input.Delta.Txids = nil
+	}
+
 	a.logger.Debug("Encoding block data")
 	encodedInput := msgpack.Encode(input)
 
@@ -206,6 +224,14 @@ func (a *WebsocketProcessor) Process(input data.BlockData) (data.BlockData, erro
 		}
 	} else {
 		responseData = input
+	}
+
+	if len(txLeases) > 0 {
+		responseData.Delta.Txleases = txLeases
+	}
+
+	if len(txids) > 0 {
+		responseData.Delta.Txids = txids
 	}
 
 	a.logger.Infof("done in %s", time.Since(start))
